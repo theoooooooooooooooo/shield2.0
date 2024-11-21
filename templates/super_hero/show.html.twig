@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de {{ superHero.nom }}{% endblock %}
+
+{% block body %}
+<div class="container form-container">
+    <div class="form-card">
+        <h2>Détails de {{ superHero.nom }}</h2>
+
+        {# Afficher les messages flash #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_row(form.nom, { 'label': 'Nom du super-héros', 'attr': { 'class': 'form-control' } }) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.alterEgo, { 'label': 'Alter Ego', 'attr': { 'class': 'form-control' } }) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.energieLevel, { 'label': 'Niveau d\'énergie', 'attr': { 'class': 'form-control' } }) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.biographie, { 'label': 'Biographie', 'attr': { 'class': 'form-control' } }) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.estDisponible) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.pouvoirs, { 'label': 'Pouvoirs associés', 'attr': { 'class': 'form-control' } }) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.createdAt, { 'label': 'Créé le', 'attr': { 'class': 'form-control' } }) }}
+            </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Mettre à jour</button>
+            </div>
+        {{ form_end(form) }}
+        
+        <div class="mt-3">
+            <a href="/" class="btn btn-secondary">Retour</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Héros{% endblock %}
+
+{% block body %}
+<style>
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+        border-radius: 5px;
+        margin-right: 0.5rem;
+    }
+
+    .badge-disponible {
+        background-color: #28a745;
+        color: white;
+    }
+    .badge-non-disponible {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .btn-details {
+        background-color: #f8e71c;
+        color: #000;
+        border: none;
+        font-weight: bold;
+        transition: 0.3s ease-in-out;
+    }
+    .btn-details:hover {
+        background-color: #50e3c2;
+        color: #fff;
+    }
+</style>
+
+<div class="text-center">
+    <h2 class="text-warning">Nos Héros</h2>
+    <div class="row mt-4"> 
+        {% for superhero in superHeros %}
+            <div class="col-md-4">
+                <div class="card bg-dark text-white mb-3">
+                    <!-- Image placeholder -->
+                    <!-- <img src="" class="card-img-top" alt="Hero 1"> -->
+                    <div class="card-body">
+                        <h5 class="card-title">{{ superhero.nom }}</h5>
+                        {% if superhero.estDisponible == 1 %}
+                            <span class="badge badge-disponible">Disponible</span>
+                        {% else %}
+                            <span class="badge badge-non-disponible">Non Disponible</span>
+                        {% endif %}
+                        <!-- Button to view details -->
+                        <a href="{{ path('app_showDetail', { 'id': superhero.id }) }}" class="btn btn-details mt-2">Voir les détails</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <h5 class="card-title">Aucun Super Hero</h5>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
