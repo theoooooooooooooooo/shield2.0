@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Pouvoir{% endblock %}
+
+{% block body %}
+<div class="container form-container">
+    <div class="form-card">
+        <h2>Créer pouvoir</h2>
+    {{ include('pouvoir/form.html.twig') }}
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">Créer</button>
+        </div>
+        {{ form_end(form) }}
+          <div class="mt-4">
+            <a href="{{ path('app_Pouvoir') }}" class="btn btn-secondary">Retour</a>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

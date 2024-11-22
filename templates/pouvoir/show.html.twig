@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Pouvoir{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row">
+        {# Colonne de gauche : Détails du pouvoir #}
+        <div class="col-md-6">
+            <h2 class="text-warning">Détails du Pouvoir : {{ pouvoir.nom }}</h2>
+
+            <p><strong>Description :</strong> {{ pouvoir.description }}</p>
+            <p><strong>Niveau :</strong> {{ pouvoir.level }}</p>
+
+            <h3 class="mt-4">Super-héros associés</h3>
+            <ul>
+                {% for hero in pouvoir.superHeroes %}
+                    <li>
+                        <a href="{{ path('app_showDetail', { id: hero.id }) }}">{{ hero.nom }}</a>
+                    </li>
+                {% else %}
+                    <li>Aucun super-héros n'est associé à ce pouvoir.</li>
+                {% endfor %}
+            </ul>
+            <div class="mt-3">
+                <a href="{{ path('app_SuppPouvoir', { id: pouvoir.id }) }}" 
+                class="btn btn-danger" 
+                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce pouvoir ?');">
+                Supprimer
+                </a>
+            </div>
+        </div>
+
+        {# Colonne de droite : Formulaire de modification #}
+        <div class="col-md-6">
+            <div class="form-card">
+                <h2>Modifier le Pouvoir</h2>
+            {% include 'pouvoir/form.html.twig' with { form: form } %}
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ path('app_SuperHero') }}" class="btn btn-secondary">Retour à la liste des super-héros</a>
+    </div>
+</div>
+{% endblock %}

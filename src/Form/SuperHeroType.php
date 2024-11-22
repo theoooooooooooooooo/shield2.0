@@ -34,8 +34,9 @@ class SuperHeroType extends AbstractType
             ])
             ->add('pouvoirs', EntityType::class, [
                 'class' => Pouvoir::class,
-                'choice_label' => 'nom',
-                'multiple' => true,
+                'choice_label' => 'nom', // Affiche le nom des pouvoirs
+                'multiple' => true, // Permet plusieurs sélections
+                'expanded' => true, // Utilise des cases à cocher
             ])
         ;
     }

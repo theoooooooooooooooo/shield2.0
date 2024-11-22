@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos pouvoir{% endblock %}
+
+{% block body %}
+<div class="text-center">
+    <h2 class="text-warning">Nos Héros</h2>
+    <a href="{{ path('app_pouvoir_new') }}" class="btn btn-primary">Nouveau</a>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+    <div class="row mt-4"> 
+        {% for pouvoir in pouvoirs %}
+            <div class="col-md-4">
+                <div class="card bg-dark text-white mb-3">
+                    <!-- Image placeholder -->
+                    <!-- <img src="" class="card-img-top" alt="Hero 1"> -->
+                    <div class="card-body">
+                        <h5 class="card-title">{{ pouvoir.nom }}</h5>
+                        <h5 class="card-title">Level : {{ pouvoir.level }}</h5>
+                        <h5 class="card-title">Desciption : {{ pouvoir.description }}</h5>
+                        <a href="{{ path('app_pouvoir_show', { 'id': pouvoir.id }) }}" class="btn btn-details mt-2">Voir les détails</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <h5 class="card-title">Aucun Super Hero</h5>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

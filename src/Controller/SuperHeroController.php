@@ -28,10 +28,6 @@ class SuperHeroController extends AbstractController
     {
         $superHero = $em->getRepository(SuperHero::class)->find($id);
 
-        if (!$superHero) {
-            throw $this->createNotFoundException('Super héros non trouvé.');
-        }
-
         // Crée un formulaire modifiable
         $form = $this->createForm(SuperHeroType::class, $superHero);
         $form->handleRequest($request);
@@ -52,14 +48,36 @@ class SuperHeroController extends AbstractController
     }
 
 
-    // #[Route('/CreerSuperHero', name: 'app_SuperHero')]
-    // public function creer(EntityManagerInterface $em): Response
-    // {
-    //     $superHero = new SuperHero();
-    //     $form = "test";
-        
-    //     return $this->render('super_hero/index.html.twig', [
-    //         'form' => $form,
-    //     ]);
-    // }
+    #[Route('/CreerSuperHero', name: 'app_CreerSuperHero')]
+    public function creer(Request $request, EntityManagerInterface $em): Response
+    {
+        $superHero = new SuperHero();
+        // Crée un formulaire modifiable
+        $form = $this->createForm(SuperHeroType::class);
+        $form->handleRequest($request);
+
+        // Si le formulaire est soumis et valide, enregistrer les modifications
+        if ($form->isSubmitted() && $form->isValid()) {
+            $SuperHeroRecupForm = $form->getData();
+            $em->persist($SuperHeroRecupForm);
+            $em->flush();
+
+            $this->addFlash('success', 'Les informations du super-héros ont été créer avec succès !');
+            return $this->redirectToRoute('app_SuperHero');
+        }
+
+        return $this->render('super_hero/create.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/SuppSuperHero/{id}', name:'app_SuppSuperHero')]
+    public function supp(EntityManagerInterface $em, int $id):Response
+    {
+        $superHero = $em->getRepository(SuperHero::class)->find($id);
+        $em->remove($superHero);
+        $em->flush();
+        $this->addFlash('success', 'Le super-héros a été supprimé avec succès.');
+        return $this->redirectToRoute('app_SuperHero');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PouvoirRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -22,7 +23,11 @@ class Pouvoir
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: "integer", options: ["unsigned" => true])]
+    #[Assert\Range(
+        min: 1,
+        max: 5,
+        notInRangeMessage: "L'énergie doit être comprise entre {{ min }} et {{ max }}.")]
     private ?int $level = null;
 
     /**
