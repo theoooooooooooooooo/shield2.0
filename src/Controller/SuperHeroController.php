@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Pouvoir;
 use App\Entity\SuperHero;
 use App\Form\SuperHeroType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,7 +37,7 @@ class SuperHeroController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Les informations du super-héros ont été mises à jour avec succès !');
-            return $this->redirectToRoute('app_showDetail', ['id' => $id]);
+            return $this->redirectToRoute('app_SuperHero');
         }
 
         return $this->render('super_hero/show.html.twig', [

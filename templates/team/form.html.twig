@@ -1,0 +1,38 @@
+{% block body %}
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.nom) }}
+        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.nom) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.estActive) }}
+        {{ form_widget(form.estActive, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.estActive) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.createdAt) }}
+        {{ form_widget(form.createdAt, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.createdAt) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.leader) }}
+        {{ form_widget(form.leader, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.leader) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.members) }}
+        {{ form_widget(form.members, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.members) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.currentMission) }}
+        {{ form_widget(form.currentMission, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.currentMission) }}
+    </div>
+{% endblock %}

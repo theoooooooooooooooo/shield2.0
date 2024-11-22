@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Teams{% endblock %}
+
+{% block body %}
+<div class="text-center">
+    <h2 class="text-warning">Nos Teams</h2>
+    <a href="{{ path('app_CreerTeam') }}" class="btn btn-primary">Nouveau</a>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+    <div class="row mt-4"> 
+        {% for team in teams %}
+            <div class="col-md-4">
+                <div class="card bg-dark text-white mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ team.nom }}</h5>
+                        <h5 class="card-title">{{ team.currentMission }}</h5>
+                        {% if team.estActive == 1 %}
+                            <span class="badge badge-disponible">Actif</span>
+                        {% else %}
+                            <span class="badge badge-non-disponible">Non Actif</span>
+                        {% endif %}
+
+                        <!-- Button to view details -->
+                        <a href="{{ path('app_ShowTeam', { 'id': team.id }) }}" class="btn btn-details mt-2">Voir les détails</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <h5 class="card-title">Aucune équipe</h5>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
