@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\MissionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: MissionRepository::class)]
 class Mission
@@ -32,7 +34,11 @@ class Mission
     #[ORM\Column(length: 255)]
     private ?string $location = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: "integer", options: ["unsigned" => true])]
+    #[Assert\Range(
+        min: 1,
+        max: 5,
+        notInRangeMessage: "L'énergie doit être comprise entre {{ min }} et {{ max }}.")]
     private ?int $dangerLevel = null;
 
     #[ORM\ManyToOne]

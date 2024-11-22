@@ -67,6 +67,27 @@ class TeamController extends AbstractController
     //     ]);
     // }
 
+    public function creer(Request $request, EntityManagerInterface $em): Response
+    {
+        $team = new Team();
+        $form = $this->createForm(TeamType::class, $team);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $em->persist($team);
+                $em->flush();
+                $this->addFlash('success', 'Équipe créée avec succès !');
+                return $this->redirectToRoute('app_CreerTeam');
+            } catch (\LogicException $e) {
+                $this->addFlash('error', $e->getMessage());
+            }
+        }
+
+        return $this->render('team/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 
 
     #[Route('/SuppTeam/{id}', name:'app_SuppTeam')]

@@ -2,14 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\Mission;
-use App\Entity\MissionStatus;
 use App\Entity\Team;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Mission;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use App\Entity\MissionStatus;
 
 class MissionType extends AbstractType
 {
@@ -18,23 +18,27 @@ class MissionType extends AbstractType
         $builder
             ->add('titre')
             ->add('description')
-            ->add('status', EnumType::class,[
-                'class' => MissionStatus::class,
-                // 'choice_label' => string,    
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    'En Attente' => MissionStatus::PENDING,
+                    'Commencée' => MissionStatus::IN_PROGRESSE,
+                    'Terminée' => MissionStatus::COMPLETED,
+                    'Échoué' => MissionStatus::FAIELD,
+                ],
+                'choice_label' => fn($choice) => $choice->value, // Affiche la valeur de l'enum
             ])
             ->add('startAt', null, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
             ])
             ->add('endAt', null, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
             ])
             ->add('location')
             ->add('dangerLevel')
             ->add('assignedTeam', EntityType::class, [
                 'class' => Team::class,
-                'choice_label' => 'id',
-            ])
-        ;
+                'choice_label' => 'nom', // ou un autre attribut descriptif
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

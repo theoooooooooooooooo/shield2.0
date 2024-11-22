@@ -39,7 +39,7 @@ class TeamType extends AbstractType
                 'expanded' => true, ])
             ->add('currentMission', EntityType::class, [
                 'class' => Mission::class,
-                'choice_label' => 'nom',]);
+                'choice_label' => 'titre',]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -113,42 +113,130 @@
                 width: 100%;
             }
             .badge {
-        font-size: 0.9rem;
-        padding: 0.5rem;
-        border-radius: 5px;
-        margin-right: 0.5rem;
-    }
+                font-size: 0.9rem;
+                padding: 0.5rem;
+                border-radius: 5px;
+                margin-right: 0.5rem;
+            }
 
-    .badge-disponible {
-        background-color: #28a745;
-        color: white;
-    }
-    .badge-non-disponible {
-        background-color: #dc3545;
-        color: white;
-    }
+            .badge-disponible {
+                background-color: #28a745;
+                color: white;
+            }
+            .badge-non-disponible {
+                background-color: #dc3545;
+                color: white;
+            }
 
-    .btn-details {
-        background-color: #f8e71c;
-        color: #000;
-        border: none;
-        font-weight: bold;
-        transition: 0.3s ease-in-out;
-    }
-    .btn-details:hover {
-        background-color: #50e3c2;
-        color: #fff;
-    }
-        .checkbox-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
+            .btn-details {
+                background-color: #f8e71c;
+                color: #000;
+                border: none;
+                font-weight: bold;
+                transition: 0.3s ease-in-out;
+            }
+            .btn-details:hover {
+                background-color: #50e3c2;
+                color: #fff;
+            }
+                .checkbox-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
 
-    .checkbox-item {
-        display: inline-block;
-        margin-right: 15px;
-    }
+            .checkbox-item {
+                display: inline-block;
+                margin-right: 15px;
+            }
+            /* Mission Table Styles */
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+                font-family: 'Bangers', cursive;
+                background-color: #1c1c1c;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                color: #fff;
+            }
+
+            th, td {
+                text-align: left;
+                padding: 12px;
+                font-size: 14px;
+                border-bottom: 1px solid #444;
+            }
+
+            th {
+                background-color: #f8e71c;  /* Jaune de votre site */
+                color: #000;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+
+            td {
+                background-color: #333;
+                color: #fff;
+            }
+
+            tr:nth-child(even) td {
+                background-color: #444;
+            }
+
+            tr:hover td {
+                background-color: #50e3c2; /* Couleur turquoise de votre site */
+                cursor: pointer;
+            }
+
+            td a {
+                color: #f8e71c;  /* Jaune pour les liens */
+                text-decoration: none;
+                padding: 6px 12px;
+                border-radius: 4px;
+                transition: all 0.3s ease;
+            }
+
+            td a:hover {
+                background-color: #50e3c2;
+                color: white;
+                text-decoration: none;
+            }
+
+            .create-button {
+                display: inline-block;
+                padding: 12px 24px;
+                background-color: #f8e71c;
+                color: #000;
+                border-radius: 5px;
+                text-decoration: none;
+                font-size: 16px;
+                margin-top: 20px;
+                transition: background-color 0.3s ease;
+            }
+
+            .create-button:hover {
+                background-color: #50e3c2;
+                color: white;
+            }
+
+            @media (max-width: 768px) {
+                table {
+                    font-size: 12px;
+                }
+
+                th, td {
+                    padding: 8px;
+                }
+
+                .create-button {
+                    width: 100%;
+                    text-align: center;
+                    margin-top: 10px;
+                }
+            }
+
         </style>
         {% endblock %}
     </head>

@@ -41,13 +41,13 @@ final class MissionController extends AbstractController{
         ]);
     }
 
-    #[Route('/{id}', name: 'app_mission_show')]
-    public function show(Mission $mission): Response
-    {
-        return $this->render('mission/show.html.twig', [
-            'mission' => $mission,
-        ]);
-    }
+    // #[Route('/{id}', name: 'app_mission_show')]
+    // public function show(Mission $mission): Response
+    // {
+    //     return $this->render('mission/show.html.twig', [
+    //         'mission' => $mission,
+    //     ]);
+    // }
 
     #[Route('/{id}/edit', name: 'app_mission_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Mission $mission, EntityManagerInterface $entityManager): Response
@@ -65,16 +65,5 @@ final class MissionController extends AbstractController{
             'mission' => $mission,
             'form' => $form,
         ]);
-    }
-
-    #[Route('/{id}', name: 'app_mission_delete', methods: ['POST'])]
-    public function delete(Request $request, Mission $mission, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$mission->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($mission);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_mission_index', [], Response::HTTP_SEE_OTHER);
     }
 }
